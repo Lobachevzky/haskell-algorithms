@@ -1,0 +1,6 @@
+import Data.Map (Map)
+
+data Vertex = Parent [Vertex]
+
+adjListToVerts :: Map -> Vertex
+adjListToVerts adjList =
