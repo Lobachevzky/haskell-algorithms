@@ -1,33 +1,23 @@
 -- | Main entry point to the application.
 module Main where
-import           Data.List
-import           Data.List.Split
-import IsolatedSet 
+import TestTrees
+
+import Knapsack
+
 
 -- | The main entry point.
 main :: IO ()
 main = do
     putStrLn "Welcome to FP Haskell Center!"
-    putStrLn $ show linkedListOfTree
-    putStrLn $ show (isolatedSet linkedListOfTree)
+    --print tree
+    --print (isolatedSet linkedListOfTree)
+    --print $ "test: " ++ show test
+    --print $ getLinkedList (treeToAdjlist $ dfs 1 tree) 1
+    --print $ bfs 1 tree
+      --where tree = tree1
+    print $ and $ map (\num -> bestValuE items num == bestValue items num) [1..10]
+     where items = items1
 
-data Dim = X | Y
 
-compareBy :: (Ord a) => Dim -> (a,a) -> (a,a) -> Ordering
-compareBy X (x1, _) (x2, _) = compare x1 x2
-compareBy Y (_, y1) (_, y2) = compare y1 y2
-
-merge :: (Ord a) => [(a,a)] -> [(a,a)] -> [(a,a)]
-merge left right = [p | p <- left, p `above` top right] ++ right
-    where
-        above (_,y1) (_,y2) = y1 > y2
-        top = maximumBy (compareBy Y)
-
-undominated    :: (Ord a) => [(a,a)] -> [(a,a)]
-undominated ps = 
-    let undominated' [q] = [q]
-        undominated' qs  = merge (undominated' left) (undominated' right)
-            where median rs     = length rs `div` 2
-                  [left, right] = splitPlaces [median qs] qs
-    in undominated' (sortBy (compareBy X) ps)
-
+linkedListOfTree :: Vertex Int
+linkedListOfTree = getLinkedList tree2 1
